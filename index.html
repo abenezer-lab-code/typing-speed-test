@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./css/style.css"/>
+
+  <title>Frontend Mentor | Typing Speed Test</title>
+
+</head>
+<body>
+<header class="header">
+  <div class="logo-section">
+  <img alt="typing speed test" src="assets/images/logo-small.svg"/>
+  </div>
+  <div class="personal-best-section">
+    <img src="assets/images/icon-personal-best.svg" alt="personal best"/>
+  <p class="personal-best-result-text">Personal best:<span class="personal-best-result-display"></span></p>
+  </div>
+</header>
+<main class="main">
+  <div class="user-record-and-setting">
+    <div class="user-record">
+    <P class="wpm-text">
+  WPM: <span class="wpm-display">0</span>
+  </P>
+  <div class="line" aria-hidden="true"></div>
+  <p class="acuracy-text">
+  Accuracy: <span class="acuracy-dispaly">100</span>%
+  </p>
+  <div class="line" aria-hidden="true"></div>
+<p class="time-text">
+
+  Time: <span class="time-display">0:60</span>
+</p>
+</div>
+<div class="container">
+<section class="dificult-control">
+  <h3 class="h3">Difficulty:</h3>
+  <button class="easy-btn btn">Easy</button>
+ <button class="medium-btn btn">Medium</button>
+  <button class="hard-btn btn btn-selcted">Hard</button>
+</section>
+<div class="line"></div>
+<section class="mode-control">
+ <h3>Mode:</h3>
+ <button class="timed-btn btn btn-selcted">Timed (60s)</button>
+  <button class="passage-btn btn">Passage</button>
+  </section>
+  </div>
+  <div class="mobile-control">
+<button class="difficultyBtn btn">Hard <img src="assets/images/icon-down-arrow.svg" aria-hidden="true"/></button>
+  <form class="mobile-dificult-control">
+<fieldset>
+<div class="form-line">
+    <input type="radio" name="difficulty" value="easy" id="easy">
+  <label for="easy">
+    easy
+    </label>
+    </div>
+
+  <div class="form-line">
+    <input type="radio" name="difficulty" value="medium" id="medium">
+  <label for="medium">
+    medium
+    </label>
+</div>
+</label>
+<div class="form-line">
+<input type="radio" name="difficulty" value="hard" id="hard" aria-checked="true" checked/>
+<label for="hard">
+hard
+</label>
+  </div>
+
+</fieldset>
+
+  </form>
+
+ <button class="modebtn btn">Timed(60s) <img src="assets/images/icon-down-arrow.svg" aria-hidden="true"/></button>
+        <form class="mobile-mode-control">
+<fieldset>
+  <div class="form-line">
+   <input type="radio" name="mode" value="timed" id="timed">
+  <label for="timed">Timed(60s)</label>
+ </div>
+ <div class="form-line">
+   <input type="radio" name="mode" value="passage" id="passage">
+  <label for="passage">Passage</label>
+</div>
+</fieldset>
+        </form>     
+</div>
+</div>
+
+  <div class="text-area">
+<div class="start-typing">
+ <button class="btn start-btn">Start Typing Test</button>
+ <p class="start-prompt-text">Or click the text and start typing</p>
+</div>
+
+<div class="text-container">
+<textarea class="textarea"></textarea>
+<p class="paragraph"></p>
+</div>
+   </div>
+   <section class="result">
+
+    
+   </section>
+</main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
