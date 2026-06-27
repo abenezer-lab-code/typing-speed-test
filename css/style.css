@@ -38,6 +38,7 @@ body{
   justify-content: space-between;
   align-items: center;
   font-size: 1.6rem;
+  height: 10vh;
 }
 .personal-best-section{
   display: flex;
@@ -72,7 +73,10 @@ position: relative;
 
 
 }
-
+.result{
+  
+  min-height: 90vh;
+}
 .start-typing{
   z-index: 1;
 position: absolute;
@@ -169,7 +173,7 @@ position: absolute;
   justify-content: center;
   gap:12px;
 
-border: 1px solid red;
+
 }
 @media  screen and (max-width:431px) {
 .dificult-control,.mode-control{
@@ -187,7 +191,7 @@ display: none;
   justify-content: center;
   position: relative;
   min-height: 6rem;
-  border: 1px solid red;
+
 }
 .mobile-control select{
   background-color: var(--neutral-900);
@@ -275,7 +279,9 @@ gap: 2rem;
 }
 .result-section{
   position: relative;
-border: 1px solid red;
+
+min-height: 90vh;
+
 }
 .right-img{
   position: absolute;

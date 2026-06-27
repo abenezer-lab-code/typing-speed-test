@@ -1,7 +1,7 @@
 const textContainer = document.querySelector(".paragraph");
 const userInput = document.querySelector(".textarea");
-const wpdDisplay = document.querySelector(".wpm-display");
-const accuracyDisplay = document.querySelector('.acuracy-dispaly');
+const wpmDisplay = document.querySelector(".wpm-display");
+const accuracyDisplay = document.querySelector('.accuracy-dispaly');
 const textArea = document.querySelector(".text-area")
 const easyBtn = document.querySelector(".easy-btn")
 const hardBtn = document.querySelector(".hard-btn")
@@ -19,7 +19,8 @@ const StartTypingPlace = document.querySelector(".start-typing")
 const modeDropDownBtn = document.querySelector(".modebtn")
 const timeDisplay = document.querySelector(".time-display");
 const UserSettingAndPreffrence = document.querySelector(".user-record-and-setting")
-const result = document.querySelector(".result")
+const result = document.querySelector(".result");
+const personalBest = document.querySelector(".personal-best-result-display")
 let textparagraph ="";
 let isTimed = true;
 let typingSpeed = 0;
@@ -30,7 +31,7 @@ let RigthtypedLength =0;
 let reminigTime;
 let startTime = null;
 let num=0;
-let countType = 0
+let countType = 0;
 const userResults = [];
 
 const  getText = async (type="easy")=>{
@@ -44,7 +45,6 @@ let randomText = specificParagraph[randomNumber(specificParagraph.length)].text
 displayText(randomText)
 textparagraph = randomText;
 }
-
 
 catch{
     console.log("error")
@@ -60,21 +60,19 @@ return Math.floor(Math.random() * range);
 
 }
 
-
 const calculateSpeed=(orginalDate)=>{
-//countType+=1;
-console.log(orginalDate)
+
 const date = new Date();
 const pastDate = date - orginalDate;
  const dateInminute = (pastDate / 1000) / 60;
 let wpm = Math.floor((TotaltypedText/5)/dateInminute)
 
-if(dateInminute < 0.15) return 0
+if(dateInminute < 0.5) return 0
 
 return wpm
 
 }
-const correctnse = (paragraph,usertext)=>{
+const isCorrect = (paragraph,usertext)=>{
     
 const lastCharacterIndex = usertext.length-1;
 
@@ -85,22 +83,24 @@ else{
 
 return false
 }
+
 }
 
 const calculateAccuracy = (paragraph,usertext)=>{
 
 
- //TotaltypedText = usertext.length; ;
  
-   if(!correctnse(paragraph,usertext)){
+   if(!isCorrect(paragraph,usertext)){
 wrongTypedLength+=1;
 
    }
+
    RigthtypedLength = TotaltypedText - wrongTypedLength;
 const wrongTypedInPercentage = (wrongTypedLength/TotaltypedText) * 100;
 const accuracy = 100 - wrongTypedInPercentage;
 
 return Math.floor(accuracy)
+
 }
 
 
@@ -112,7 +112,7 @@ const lastCharacter = usertext[lastCharacterIndex];
 
 const element = document?.getElementById(`char-${num}`);
 
-if(correctnse(textparagraph,usertext) && element!==undefined){
+if(isCorrect(textparagraph,usertext) && element!==undefined){
 element.style.color="green"
 
 }else{
@@ -122,6 +122,7 @@ element.style.color="green"
 
 }
 const displayText = (data)=>{
+  
     textContainer.innerHTML=""
 let count=0
 for(const value of data){
@@ -142,7 +143,7 @@ passageBtn.disabled = true;
 startBtn.parentElement.classList.add("display")
 textContainerPlace.classList.add("display")
 userPrefernce()
-
+userInput.focus()
 
 }
 
@@ -178,13 +179,15 @@ startTime = new Date();
 if(userInput.value.length >= textparagraph.length){
   typeFinish(typingSpeed,userAccuracy)
   resultDisplayFunction()
-
+clearInterval(myIntreval)
 }
- let timeRemainInMinute =0
 const myIntreval = setInterval(function(){
-
- timeRemainInMinute+=1
-timeDisplay.textContent = timeRemainInMinute
+const newTime = new Date()
+const diffrence = newTime - startTime;
+console.log(diffrence)
+const timeInSecond = String(Math.floor((diffrence/1000) % 60)).padStart(2,'0')
+const timeInMinute  = String(Math.floor(((diffrence/1000/60)%60))).padStart(2,'0')
+timeDisplay.textContent = `${timeInMinute}:${timeInSecond}`
 
 },1000)
 
@@ -212,7 +215,21 @@ catch{
 }
 return result
 }
+const displayHighScore =  ()=>{
+const results = getResults()
+if(results.length===0){
+  return 0
+}
 
+else {
+  let max = results[0].wpm
+  results.forEach(score=>{
+    if(score.wpm>max) max = score.wpm
+  })
+return max
+}
+}
+personalBest.textContent = displayHighScore()
 const typeFinish = (wpm,accuracy,characters)=>{
 
 const results = getResults()
@@ -235,7 +252,7 @@ wrongTypedLength=0;
 TotaltypedText=0;
 num=0;
 countType = 0
-wpdDisplay.textContent =0;
+wpmDisplay .textContent =0;
 accuracyDisplay.textContent = 100;
 textparagraph =""
 easyBtn.disabled = false;
@@ -281,10 +298,10 @@ for(let i=0;i<results.length;i++){
   };
 
 }
-console.log(isHighScoreScorred)
+
 
 if(results.length <2){
-
+ personalBest.textContent = currentResult.wpm;
 heading="Baseline Established";
 paragraph = "You've set the bar.Now the real challange begins-time to beat it.";
 headingImageSrc = "./assets/images/icon-completed.svg";
@@ -295,7 +312,7 @@ bottomImageSrc = "no"
 }
 
 else if(isHighScoreScorred && results.length > 1){
-
+personalBest.textContent = currentResult.wpm;
 heading="High Score Smashed!"
 paragraph = "You are getting faster. That was increadible typing.";
 headingImageSrc ="./assets/images/icon-new-pb.svg";
@@ -337,7 +354,7 @@ const htmlContent =`
 <p>${RigthtypedLength}/${wrongTypedLength}</p>
 </div>
 </div>
-<button class="restartBtn btn">Beat this score</button>
+<button class="restartBtn btn">Beat this score <img src="${"assets/images/icon-restart.svg"}" aria-hidden="true"/></button>
 
 <img src="${leftImageSrc}" class="left-img"/>
 
@@ -364,8 +381,8 @@ restart()
 
 }
 
-startBtn.addEventListener("click",startTyping)
-userInput.addEventListener("click",startTyping)
+startBtn.addEventListener("click",startTyping,{once:true})
+userInput.addEventListener("click",startTyping,{once:true})
 
 userInput.addEventListener("input",()=>{
 TotaltypedText++;
@@ -374,7 +391,7 @@ let input = userInput.value
   
 typingSpeed =  calculateSpeed(startTime)
 userAccuracy = calculateAccuracy(textparagraph,input);
-wpdDisplay.textContent =typingSpeed;
+wpmDisplay.textContent =typingSpeed;
 accuracyDisplay.textContent = userAccuracy;
 heiLightELements(textparagraph,input)
 
