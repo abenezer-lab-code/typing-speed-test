@@ -39,20 +39,20 @@
 <div class="container">
 <section class="dificult-control">
   <h3 class="h3">Difficulty:</h3>
-  <button class="easy-btn btn">Easy</button>
- <button class="medium-btn btn">Medium</button>
-  <button class="hard-btn btn btn-selcted">Hard</button>
+  <button class="easy-btn btn" aria-pressed="false">Easy</button>
+ <button class="medium-btn btn" aria-pressed="false">Medium</button>
+  <button class="hard-btn btn btn-selected" aria-pressed="true">Hard</button>
 </section>
 <div class="line"></div>
 <section class="mode-control">
  <h3>Mode:</h3>
- <button class="timed-btn btn btn-selcted">Timed (60s)</button>
-  <button class="passage-btn btn">Passage</button>
+ <button class="timed-btn btn btn-selected" aria-pressed="true">Timed (60s)</button>
+  <button class="passage-btn btn" aria-pressed="false">Passage</button>
   </section>
   </div>
   <div class="mobile-control">
-<button class="difficultyBtn btn">Hard <img src="assets/images/icon-down-arrow.svg" aria-hidden="true"/></button>
-  <form class="mobile-dificult-control">
+<button class="difficultyBtn btn" aria-controls="difficult-mode-form" aria-expanded="false">Hard <img src="assets/images/icon-down-arrow.svg" aria-hidden="true"/></button>
+  <form class="mobile-dificult-control" id="difficult-mode-form">
 <fieldset>
 <div class="form-line">
     <input type="radio" name="difficulty" value="easy" id="easy">
@@ -79,8 +79,8 @@ hard
 
   </form>
 
- <button class="modebtn btn">Timed(60s) <img src="assets/images/icon-down-arrow.svg" aria-hidden="true"/></button>
-        <form class="mobile-mode-control">
+ <button class="modebtn btn" aria-controls="mobile-mode-form" aria-expanded="false">Timed(60s) <img src="assets/images/icon-down-arrow.svg" aria-hidden="true"/></button>
+        <form class="mobile-mode-control" id="mode-control-form">
 <fieldset>
   <div class="form-line">
    <input type="radio" name="mode" value="timed" id="timed">

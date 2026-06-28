@@ -105,10 +105,12 @@ gap: 2rem;
   justify-content: space-between;
   align-items: center;
   
+  width: 100%;
+  gap:1.2rem
 }
 .line{
 
-height: 2rem;
+height: 3rem;
 width: 0.6px;
 background-color:var(--neutral-400) ;
 
@@ -175,7 +177,10 @@ position: absolute;
 
 
 }
-@media  screen and (max-width:431px) {
+span{
+  color: var(--neutral-0);
+}
+@media  screen and (max-width:26.9rem) {
 .dificult-control,.mode-control{
 display: none;
 }
@@ -183,7 +188,7 @@ display: none;
   display: block;
 }
 .mobile-control{
-  display: block;
+  
   width: 100%;
   margin: auto;
   display: flex;
@@ -198,8 +203,8 @@ display: none;
 color: var(--neutral-0);
 }
  .user-record-and-setting{
-
-  display: grid;
+padding: 0;
+display: grid;
 grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
   
@@ -210,8 +215,8 @@ grid-template-columns: 1fr;
 position: absolute;
 top:4.2rem;
 background-color: var(--neutral-800);
-left: 0;
-width:70% ;
+left: 1rem;
+
 z-index: 1;
 border: none;
 outline: none;
@@ -228,7 +233,8 @@ position: absolute;
 top:4.2rem;
 background-color: var(--neutral-800);
 right: 0;
-width: 40%;
+
+
 z-index: 1;
 
 }
@@ -273,7 +279,7 @@ gap: 2rem;
 }
 
 }
-.btn-selcted{
+.btn-selected{
   border-color: var(--blue-600);
   color: var(--blue-600);
 }

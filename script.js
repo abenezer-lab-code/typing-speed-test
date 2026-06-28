@@ -21,6 +21,7 @@ const timeDisplay = document.querySelector(".time-display");
 const UserSettingAndPreffrence = document.querySelector(".user-record-and-setting")
 const result = document.querySelector(".result");
 const personalBest = document.querySelector(".personal-best-result-display")
+const allBtns = document.querySelectorAll(".easy-btn , .hard-btn , .medium-btn , .timed-btn , .passage-btn")
 let textparagraph ="";
 let isTimed = true;
 let typingSpeed = 0;
@@ -162,9 +163,7 @@ clearInterval(myIntreval)
 
  let timeRemainInMinute = 60
 const myIntreval = setInterval(function(){
-
-
-
+  
  timeRemainInMinute-=1
 timeDisplay.textContent = timeRemainInMinute
 
@@ -270,6 +269,7 @@ mediumBtn.classList.remove("btn-selcted");
 UserSettingAndPreffrence.style.display = "grid";
 
 userInput.value =""
+
 getText("hard")
 }
 
@@ -408,36 +408,54 @@ element.style.color="white"
 }
 
 })
+const handleIsPressd =()=>{
+allBtns.forEach(btn=>{
+if(btn.classList.contains("btn-selected")){
+  btn.setAttribute("is-pressed","true")
+}else{
+ btn.setAttribute("aria-pressed","false")
+} 
+console.log(btn.getAttribute("is-pressed"))
+})
+}
 
 
 easyBtn.addEventListener("click",()=>{
 
 
-     easyBtn.classList.add("btn-selcted");
-    hardBtn.classList.remove("btn-selcted")
-      mediumBtn.classList.remove("btn-selcted");
+     easyBtn.classList.add("btn-selected");
+    hardBtn.classList.remove("btn-selected")
+      mediumBtn.classList.remove("btn-selected");
 getText("easy")
+handleIsPressd()
+
 })
 
 hardBtn.addEventListener("click",()=>{
 
-     easyBtn.classList.remove("btn-selcted");
-    hardBtn.classList.add("btn-selcted")
-      mediumBtn.classList.remove("btn-selcted");
+     easyBtn.classList.remove("btn-selected");
+    hardBtn.classList.add("btn-selected")
+      mediumBtn.classList.remove("btn-selected");
 getText("hard")
+handleIsPressd()
 })
 
 mediumBtn.addEventListener("click",()=>{
 
-     easyBtn.classList.remove("btn-selcted");
-    hardBtn.classList.remove("btn-selcted")
-      mediumBtn.classList.add("btn-selcted");
+     easyBtn.classList.remove("btn-selected");
+    hardBtn.classList.remove("btn-selected")
+      mediumBtn.classList.add("btn-selected");
 getText("medium")
-
+handleIsPressd()
 })
+
  difficlutyDropDownBtn.addEventListener("click",()=>{
 mobileDifficultControl.classList.toggle("display")
-
+if(mobileDifficultControl.classList.contains("display")){
+  difficlutyDropDownBtn.setAttribute("aria-expanded","true")
+}else{
+  difficlutyDropDownBtn.setAttribute("aria-expanded","false")
+}
  })
 dificultInputs.forEach(function(element){
   
@@ -450,8 +468,13 @@ getText(element.value)
 })
 
   modeDropDownBtn.addEventListener("click",()=>{
-mobileModeControl.classList.toggle("display")
 
+mobileModeControl.classList.toggle("display")
+if(mobileModeControl.classList.contains("display")){
+modeDropDownBtn.setAttribute("aria-expanded","true")
+}else{
+ modeDropDownBtn.setAttribute("aria-expanded","false")
+}
  })
 
  modeInput.forEach(function(element){
@@ -466,12 +489,14 @@ mobileModeControl.classList.toggle("display")
 
 timedbtn.addEventListener("click",()=>{
   isTimed=true
-  passageBtn.classList.remove("btn-selcted")
-  timedbtn.classList.add("btn-selcted");
+  passageBtn.classList.remove("btn-selected")
+  timedbtn.classList.add("btn-selected");
+  handleIsPressd()
 })
 passageBtn.addEventListener("click",()=>{
   isTimed=false
-  timedbtn.classList.remove("btn-selcted")
-  passageBtn.classList.add("btn-selcted");
+  timedbtn.classList.remove("btn-selected")
+  passageBtn.classList.add("btn-selected");
+  handleIsPressd()
 })
 
